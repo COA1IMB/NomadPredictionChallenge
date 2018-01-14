@@ -1,0 +1,30 @@
+import h2o
+import pandas
+
+h2o.init(nthreads=-1, strict_version_check=True)
+dfP = pandas.read_csv("test.csv")
+
+
+modelB = h2o.load_model("/Users/Fabian/PycharmProjects/Material/ATOMS-20_model_9")
+modelF = h2o.load_model("/Users/Fabian/PycharmProjects/Material/ATOMSB-10_model_2")
+
+#dfP.fillna(0)
+df = h2o.H2OFrame(dfP)
+#dfP.to_csv("check.csv")
+
+id = h2o.as_list(df["id"], use_pandas=True)
+
+#predictionF = modelF.predict(df)
+predictionB = modelB.predict(df)
+#
+# predictionFrameF = h2o.as_list(predictionF, use_pandas=True)
+# predictionFrameB = h2o.as_list(predictionB, use_pandas=True)
+#
+# predictionB.fillna(0)
+#
+# frames = [id,predictionFrameF, predictionFrameB]
+# result = pandas.concat(frames, axis=1)
+# result.columns = ['id','formation_energy_ev_natom', 'bandgap_energy_ev']
+#
+# result.to_csv("predictions.csv",index=False)
+
